@@ -13,7 +13,7 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
 {
         var $accepted_currencies = array('SGD', 'USD', 'MYR');
         var $multiple = true;
-        var $name = 'MOLPay';
+        var $name = 'molpay';
         
         //This function is called when the order is confirmed by pressing the finish button and it will redirect to the end page
         function onAfterOrderConfirm(&$order, &$methods, $method_id) 

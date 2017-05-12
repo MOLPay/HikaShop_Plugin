@@ -10,7 +10,7 @@
         <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
         <description>This plugin enables you to setup your MOLPay payment system</description>
         <files>
-                <filename plugin="MOLPay">molpay.php</filename>
+                <filename plugin="molpay">molpay.php</filename>
                 <filename>molpay_configuration.php</filename>
                 <filename>molpay_end.php</filename>
         </files>
