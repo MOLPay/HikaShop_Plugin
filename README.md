@@ -1,7 +1,7 @@
-MOLPay Joomla HikaShop Plugin
+HikaShop MOLPay Payment Plugin
 =====================
 
-MOLPay Plugin for Joomla HikaShop Shopping Cart developed by MOLPay R&D team.
+MOLPay payment plugin for HikaShop (Shopping Cart for Joomla) developed by MOLPay R&D team.
 
 
 Supported version
