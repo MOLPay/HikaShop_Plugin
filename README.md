@@ -21,19 +21,19 @@ Installations
 
 1. Download or clone this repository.
 
-2. Copy [molpay_hikashop.zip] from distribution folder.
+2. Copy [molpay_hikashop.zip] (or [molpay_seamless_hikashop.zip]) from distribution folder.
 
 3. Login into joomla administration panel and navigate to Extension -> Manage -> Install.
 
-4. At field Upload Package File, Upload and Install the [molpay_hikashop.zip].
+4. At field Upload Package File, Upload and Install the [molpay_hikashop.zip] (or [molpay_seamless_hikashop.zip]).
 
-5. At the same page, click Manage and find "HikaShop MOLPay Payment Plugin" from the list and ensure the status is enabled (color green).
+5. At the same page, click Manage and find "HikaShop MOLPay Payment Plugin" (or "HikaShop MOLPay Seamless payment plugin") from the list and ensure the status is enabled (color green).
 
 6. Next, navigate to Components -> HikaShop. Under System menu, click on the Payment Methods link.
 
-7. Click "New" button at the configuration menu and select "HikaShop MOLPay Payment Plugin".
+7. Click "New" button at the configuration menu and select "HikaShop MOLPay Payment Plugin" (or "HikaShop MOLPay Seamless payment plugin").
 
-8. Please fill the required fields.  
+8. Please fill the required fields.
   Main information
   - Name : MOLPay
 
@@ -42,12 +42,13 @@ Installations
   
 9. On the Specific configuration tab, fill the required fields.
   - MOLPay Merchant ID
-  - MOLPay Verify Key
-  - MOLPay Private Key (If this field is left blank, it will be the same as Verify Key)
+  - MOLPay Channel (required for seamless only)
+  - MOLPay Verify (Public) Key
+  - MOLPay Secret (Private) Key
 
 10. Save the configuration and test with our sandbox account.
 
-11. Login into MOLPay Merchant Admin and set Callback URL and Return URL
+11. Login into MOLPay Merchant Portal and set Callback URL and Return URL
 
   ``CallbackURL: https://shoppingcarturl/index.php?option=com_hikashop&ctrl=checkout&task=notify&notif_payment=molpay&tmpl=component&lang=en`` 
   
