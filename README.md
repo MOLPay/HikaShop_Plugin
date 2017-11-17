@@ -33,7 +33,7 @@ Installations
 
 7. Click "New" button at the configuration menu and select "HikaShop MOLPay Payment Plugin" (or "HikaShop MOLPay Seamless payment plugin").
 
-8. Please fill the required fields.
+8. Please fill the required fields.  
   Main information
   - Name : MOLPay
 
