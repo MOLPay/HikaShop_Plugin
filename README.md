@@ -1,12 +1,14 @@
 HikaShop MOLPay Payment Plugin
 =====================
-
+![alt text](https://github.com/MOLPay/Prestashop_Plugin/wiki/images/molpay-developer.jpg)
 MOLPay payment plugin for HikaShop (Shopping Cart for Joomla) developed by MOLPay R&D team.
 
 
 Supported version
 -----------------
-[Joomla 1.5 above]
+[Joomla 1.5 and above]
+
+[HikaShop Starter: 3.2.1 and above]
 
 Notes
 -----
@@ -33,22 +35,22 @@ Installations
 
 7. Click "New" button at the configuration menu and select "HikaShop MOLPay Payment Plugin" (or "HikaShop MOLPay Seamless payment plugin").
 
-8. Please fill the required fields.  
+8. Please fill in the required fields.  
   Main information
   - Name : MOLPay
 
   Generic configuration
   - Published : Yes
   
-9. On the Specific configuration tab, fill the required fields.
+9. On the Specific configuration tab, fill in the required fields.
   - MOLPay Merchant ID
-  - MOLPay Channel (required for seamless only)
+  - MOLPay Channels (This field is required for seamless integration only)
   - MOLPay Verify (Public) Key
   - MOLPay Secret (Private) Key
 
 10. Save the configuration and test with our sandbox account.
 
-11. Login into MOLPay Merchant Portal and set Callback URL and Return URL
+11. Login into MOLPay Merchant Portal and set Callback URL, Notification URL and Return URL
 
   ``CallbackURL: https://shoppingcarturl/index.php?option=com_hikashop&ctrl=checkout&task=notify&notif_payment=molpay&tmpl=component&lang=en`` 
   
