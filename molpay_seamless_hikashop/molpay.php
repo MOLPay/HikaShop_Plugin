@@ -148,7 +148,11 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                         $history->data = JText::_('The Payment is successful on channel') . ' : ' . $channel;
                         $this->writeToLog('This payment is successful.\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n' . print_r($_POST, true) . '===============\n\n\n');
                         $this->modifyOrder($orderid, 'confirmed', $history, true);
-                        $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+
+                        if($nbcb != 1 && $nbcb != 2)
+                        {
+                                $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+                        }
                 }
                 else if($status == '11')
                 {	
@@ -157,7 +161,11 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                                 $history->data = JText::_('The Payment has failed on channel') . ' : ' . $channel;
                                 $this->writeToLog('This payment is still pending.\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n' . print_r($_POST, true) . '===============\n\n\n');
                                 $this->modifyOrder($orderid, 'pending', $history, true);
-                                $this->app->redirect(HIKASHOP_LIVE . 'index.php/component/hikashop/checkout/');
+
+                                if($nbcb != 1 && $nbcb != 2)
+                                {
+                                        $this->app->redirect(HIKASHOP_LIVE . 'index.php/component/hikashop/checkout/');
+                                }
                         }
                 }
                 else if($status == '22')
@@ -165,7 +173,11 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                         $history->data = JText::_('The Payment is pending on channel') . ' : ' . $channel;
                         $this->writeToLog('This payment is still pending.\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n' . print_r($_POST, true) . '===============\n\n\n');
                         $this->modifyOrder($orderid, 'pending', $history, true);
-                        $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+                        
+                        if($nbcb != 1 && $nbcb != 2)
+                        {
+                                $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+                        }
                 }
                 else
                 {

@@ -11,7 +11,7 @@ defined('_JEXEC') or die('Restricted access');
 <tr>
         <td class="key">
                 <label for="data[payment][payment_params][merchantID]"><?php
-                        echo JText::_('merchantID');
+                        echo JText::_('Merchant ID');
                 ?></label>
         </td>
         <td>
@@ -21,7 +21,7 @@ defined('_JEXEC') or die('Restricted access');
 <tr>
         <td class="key">
                 <label for="data[payment][payment_params][verifyKey]"><?php
-                        echo JText::_('verifyKey');
+                        echo JText::_('Verify Key');
                 ?></label>
         </td>
         <td>
@@ -30,11 +30,11 @@ defined('_JEXEC') or die('Restricted access');
 </tr>
 <tr>
         <td class="key">
-                <label for="data[payment][payment_params][privateKey]"><?php
-                        echo JText::_('privateKey');
+                <label for="data[payment][payment_params][secretKey]"><?php
+                        echo JText::_('Secret Key');
                 ?></label>
         </td>
         <td>
-                <input type="text" name="data[payment][payment_params][privateKey]" value="<?php echo $this->escape(@$this->element->payment_params->privateKey); ?>" />
+                <input type="text" name="data[payment][payment_params][secretKey]" value="<?php echo $this->escape(@$this->element->payment_params->secretKey); ?>" />
         </td>
 </tr>
