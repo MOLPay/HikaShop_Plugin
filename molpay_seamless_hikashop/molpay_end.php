@@ -10,8 +10,13 @@
 	</span>
 	<br/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="https://www.onlinepayment.com.my/MOLPay/API/seamless/latest/js/MOLPay_seamless.deco.js"></script>
+	
 	<?php
+	if($this->payment_params->accountType == "sandbox")
+			echo "<script src='https://sandbox.molpay.com/MOLPay/API/seamless/latest/js/MOLPay_seamless.deco.js'></script>";
+	else if($this->payment_params->accountType == "production")
+			echo "<script src='https://www.onlinepayment.com.my/MOLPay/API/seamless/latest/js/MOLPay_seamless.deco.js'></script>";
+
 	if(isset($this->vars)) 
 	{
 			$your_process_status = true;

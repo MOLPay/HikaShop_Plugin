@@ -10,6 +10,23 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 <tr>
         <td class="key">
+                <label for="data[payment][payment_params][accountType]"><?php
+                        echo JText::_('Account Type');
+                ?></label>
+        </td>
+        <td>
+                <select name="data[payment][payment_params][accountType]">
+                        <option value="sandbox" 
+                                <?php if($this->escape(@$this->element->payment_params->accountType) == "sandbox"){ echo "selected"; } ?>
+                        >Sandbox</option>
+                        <option value="production"
+                                <?php if($this->escape(@$this->element->payment_params->accountType) == "production"){ echo "selected"; } ?>
+                        >Production</option>
+                </select>
+        </td>
+</tr>
+<tr>
+        <td class="key">
                 <label for="data[payment][payment_params][merchantID]"><?php
                         echo JText::_('Merchant ID');
                 ?></label>

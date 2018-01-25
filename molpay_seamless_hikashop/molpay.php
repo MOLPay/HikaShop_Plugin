@@ -199,7 +199,12 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                                 $postData[]= $k."=".$v;
                         }
                         $postdata = implode("&",$postData);
-                        $url = "https://www.onlinepayment.com.my/MOLPay/API/chkstat/returnipn.php";
+                        
+                        if($this->payment_params->accountType == "sandbox")
+                                $url = "https://sandbox.molpay.com/MOLPay/API/chkstat/returnipn.php";
+                        else if($this->payment_params->accountType == "production")
+                                $url = "https://www.onlinepayment.com.my/MOLPay/API/chkstat/returnipn.php";
+                        
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_POST , 1 );
                         curl_setopt($ch, CURLOPT_POSTFIELDS , $postdata );

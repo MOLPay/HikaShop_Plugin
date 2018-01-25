@@ -43,8 +43,13 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                         //'callbackurl' => $notify_url
                 );
 
-                if(empty($this->payment_params->payment_url))
-                        $this->payment_params->payment_url = 'https://www.onlinepayment.com.my/MOLPay/pay/' . $this->payment_params->merchantID . '/';
+                if(empty($this->payment_params->payment_url)) 
+                {
+                        if($this->payment_params->accountType == "sandbox")
+                                $this->payment_params->payment_url = 'https://sandbox.molpay.com/MOLPay/pay/' . $this->payment_params->merchantID . '/';
+                        else if($this->payment_params->accountType == "production")
+                                $this->payment_params->payment_url = 'https://www.onlinepayment.com.my/MOLPay/pay/' . $this->payment_params->merchantID . '/';
+                }
 
                 $this->vars = $vars;
                 return $this->showPage('end');
@@ -143,7 +148,12 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                                 $postData[]= $k."=".$v;
                         }
                         $postdata = implode("&",$postData);
-                        $url = "https://www.onlinepayment.com.my/MOLPay/API/chkstat/returnipn.php";
+
+                        if($this->payment_params->accountType == "sandbox")
+                                $url = "https://sandbox.molpay.com/MOLPay/API/chkstat/returnipn.php";
+                        else if($this->payment_params->accountType == "production")
+                                $url = "https://www.onlinepayment.com.my/MOLPay/API/chkstat/returnipn.php";
+
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_POST , 1 );
                         curl_setopt($ch, CURLOPT_POSTFIELDS , $postdata );
