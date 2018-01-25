@@ -17,7 +17,8 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
 
         //This function is to show the dropdownlist under the payment method
         function needCC(&$method) 
-        {
+        {     
+                $listChannel = "";
                 foreach($this->currency as $key => $value)
                 {
                         foreach($value as $k => $v)
@@ -34,23 +35,28 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                         $channels = $method->payment_params->mpschannel;
                         $molpay = new molpay();
 
-                        $listChannel = "<select name='channel' id='channel'>"
-                                     . "<option value='-'>---Select Channel---</option>";
+                        $listChannel .= "<style>
+                                        .col-xs-6
+                                        {
+                                                float: left;
+                                                width: auto; 
+                                        }
+                                        .marginbttm{
+                                                padding: 7px;
+                                        }
+                                        </style>";
+                        $listChannel .= "<div class='row' id='payment_method' style='background: white; border-radius: 5px; border: 1px solid #f2f2f2; margin-left: 0px;'>";
 
                         foreach($channels as $key => $val) 
                         {
                                 if($molpay->getChannelNameByCurrency($val, $currency) != "")
                                 {
-                                        $listChannel .= "<option value='" . $val . "'";
-                                        if(isset($_SESSION['channel']) && $_SESSION['channel'] == $val)
-                                                $listChannel .= " selected>" . $molpay->getChannelNameByCurrency($val, $currency) . "</option>";
-                                        else
-                                                $listChannel .= ">" . $molpay->getChannelNameByCurrency($val, $currency) . "</option>";
+                                        $listChannel .= "<div class='col-md-2 col-xs-6 marginbttm text-center " . $currency . "'><label class='hand' for='payment" . $val . "'><img src='/joomla/images/channel_logos/" . $val . ".jpg' title='" . $molpay->getChannelNameByCurrency($val, $currency) . "'/></label><input style='margin: 8px 0px 0px 8px;' type='radio' name='channel' id='payment" . $val . "' value='" . $val . "' required/></div>";
                                 }
                         }
-                        $listChannel .= "</select>";
+                        $listChannel .= "</div>";
 
-                        $method->custom_html = JText::_('Channel: ') . $listChannel 
+                        $method->custom_html = JText::_('Please select a payment channel from below to proceed to payment: ') . $listChannel 
                                              . "<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'>
                                                 </script>"
                                              . "<script type='text/javascript'>
@@ -204,7 +210,7 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                                 $url = "https://sandbox.molpay.com/MOLPay/API/chkstat/returnipn.php";
                         else if($this->payment_params->accountType == "production")
                                 $url = "https://www.onlinepayment.com.my/MOLPay/API/chkstat/returnipn.php";
-                        
+
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_POST , 1 );
                         curl_setopt($ch, CURLOPT_POSTFIELDS , $postdata );
