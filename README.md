@@ -43,6 +43,7 @@ Installations
   - Published : Yes
   
 9. On the Specific configuration tab, fill in the required fields.
+  - MOLPay Account Type (Sandbox/Production)
   - MOLPay Merchant ID
   - MOLPay Channels (This field is required for seamless integration only)
   - MOLPay Verify (Public) Key
