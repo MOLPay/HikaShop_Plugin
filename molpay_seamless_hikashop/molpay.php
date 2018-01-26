@@ -257,18 +257,25 @@ class molpay
                         'fpx_rhb'               => 'FPX RHB Bank',
                         'cash-711'              => '7-Eleven',
                         'credit'                => 'Credit Card/ Debit Card',
-                        'enetsD'                => 'eNets',
-                        'cash-epay'             => 'e-pay',
-                        'PEXPLUS'               => 'PEx+',
+                        //'enetsD'                => 'eNets',
+                        //'cash-epay'             => 'e-pay',
+                        //'PEXPLUS'               => 'PEx+',
                         'jompay'                => 'JomPAY',
-                        'Cash-Esapay'           => 'Esapay',
+                        //'Cash-Esapay'           => 'Esapay',
                         'FPX_OCBC'              => 'FPX OCBC Bank',
                         'FPX_SCB'               => 'FPX Standard Chartered Bank',
                         'FPX_ABB'               => 'FPX Affin Bank',
-                        'singpost'              => 'Cash SAM',
-                        'fpx_abmb'              => 'FPX Alliance Bank',
-                        'fpx_uob'               => 'FPX United Overseas Bank',
-                        'fpx_bsn'               => 'FPX Bank Simpanan Nasional'
+                        //'singpost'              => 'Cash SAM',
+                        //'fpx_abmb'              => 'FPX Alliance Bank',
+                        //'fpx_uob'               => 'FPX United Overseas Bank',
+                        //'fpx_bsn'               => 'FPX Bank Simpanan Nasional',
+                        'th_pb_scbpn'           => 'SCBPN',
+                        'th_pb_ktbpn'           => 'KTBPN',
+                        'th_pb_baypn'           => 'BAYPN',
+                        'th_pb_bblpn'           => 'BBLPN',
+                        'th_pb_cash'            => 'CASH',
+                        'vtc-vietcombank'       => 'Vietcom Bank',
+                        'vtc-techcombank'       => 'Techcom Bank'
                 );
 
                 return $list;
@@ -296,25 +303,33 @@ class molpay
                                 'fpx_mb2u'              => 'FPX Maybank2u',
                                 'fpx_pbb'               => 'FPX PublicBank',
                                 'fpx_rhb'               => 'FPX RHB Bank',
-                                'cash-711'              => '7-Eleven',
-                                'credit'                => 'Credit Card/ Debit Card',
-                                'enetsD'                => 'eNets',
-                                'cash-epay'             => 'e-pay',
-                                'PEXPLUS'               => 'PEx+',
-                                'jompay'                => 'JomPAY',
-                                'Cash-Esapay'           => 'Esapay'
-                        );
-                }
-                else
-                {
-                        $list = array(
                                 'FPX_OCBC'              => 'FPX OCBC Bank',
                                 'FPX_SCB'               => 'FPX Standard Chartered Bank',
                                 'FPX_ABB'               => 'FPX Affin Bank',
-                                'singpost'              => 'Cash SAM',
-                                'fpx_abmb'              => 'FPX Alliance Bank',
-                                'fpx_uob'               => 'FPX United Overseas Bank',
-                                'fpx_bsn'               => 'FPX Bank Simpanan Nasional'
+                                'cash-711'              => '7-Eleven',
+                                'credit'                => 'Credit Card/ Debit Card',
+                                //'enetsD'                => 'eNets',
+                                //'cash-epay'             => 'e-pay',
+                                //'PEXPLUS'               => 'PEx+',
+                                'jompay'                => 'JomPAY',
+                                //'Cash-Esapay'           => 'Esapay'
+                        );
+                }
+                else if($currency=="THB")
+                {
+                        $list = array(
+                                'th_pb_scbpn'   => 'SCBPN',
+                                'th_pb_ktbpn'   => 'KTBPN',
+                                'th_pb_baypn'   => 'BAYPN',
+                                'th_pb_bblpn'   => 'BBLPN',
+                                'th_pb_cash'    => 'CASH'
+                        );
+                }
+                else if($currency=="VND")
+                {
+                        $list = array(
+                                'vtc-vietcombank'   => 'Vietcom Bank',
+                                'vtc-techcombank'   => 'Techcom Bank'
                         );
                 }
 
