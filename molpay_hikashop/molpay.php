@@ -21,11 +21,11 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                 parent::onAfterOrderConfirm($order, $methods, $method_id);
                 
                 $return_url = HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=notify&notif_payment=molpay&tmpl=component&lang=en';
-                //$cancel_url = HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=order&task=cancel_order';
+                $cancel_url = HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=order&task=cancel_order';
                 //$notify_url = HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=notify&notif_payment=molpay&tmpl=component&lang=en';
 
                 $this->payment_params->return_url = $return_url;
-                //$this->payment_params->cancel_url = $cancel_url;
+                $this->payment_params->cancel_url = $cancel_url;
                 //$this->payment_params->notify_url = $notify_url;
 
                 $vars = array(
@@ -39,7 +39,7 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                         'country' => $order->cart->billing_address->address_country->zone_code_2,
                         'vcode' => md5($order->order_full_price . $this->payment_params->merchantID . $order->order_id . $this->payment_params->verifyKey),
                         'returnurl' => $return_url,
-                        //'cancelurl' => $cancel_url,
+                        'cancelurl' => $cancel_url,
                         //'callbackurl' => $notify_url
                 );
 
