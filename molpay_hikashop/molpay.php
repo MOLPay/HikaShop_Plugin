@@ -107,6 +107,7 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                                 }
                                 else
                                 {
+										$this->modifyOrder($orderid, 'confirmed', $history, false);
                                         $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
                                 }
                         }
@@ -128,6 +129,7 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                                         }     
                                         else
                                         {
+                                                $this->modifyOrder($orderid, 'pending', $history, false);											
                                                 $this->app->redirect(HIKASHOP_LIVE . 'index.php/component/hikashop/checkout/');
                                         }
                                 }
@@ -148,6 +150,7 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                                 }
                                 else
                                 {
+                                        $this->modifyOrder($orderid, 'pending', $history, false);									
                                         $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
                                 }
                         }
@@ -161,6 +164,10 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                         {
                                 $this->modifyOrder($orderid, 'pending', $history, true);                                
                         }
+						else
+						{
+								$this->modifyOrder($orderid, 'pending', $history, false);
+						}
                 }
 
                 if($nbcb == 1) 
