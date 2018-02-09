@@ -96,7 +96,12 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                 {
                         $history->data = JText::_('The Payment is successful on channel') . ' : ' . $channel;
                         $this->writeToLog('This payment is successful.\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n' . print_r($_POST, true) . '===============\n\n\n');
-                        $this->modifyOrder($orderid, 'confirmed', $history, true);
+                        if($dbOrder->order_status != 'confirmed')
+                                $send_email = true;
+                        else
+                                $send_email = false;
+
+                        $this->modifyOrder($orderid, 'confirmed', $history, $send_email);
 
                         if($nbcb != 1 && $nbcb != 2)
                         {
@@ -109,7 +114,12 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                         {
                                 $history->data = JText::_('The Payment has failed on channel') . ' : ' . $channel;
                                 $this->writeToLog('This payment is still pending.\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n' . print_r($_POST, true) . '===============\n\n\n');
-                                $this->modifyOrder($orderid, 'pending', $history, true);
+                                if($dbOrder->order_status != 'pending')
+                                        $send_email = true;
+                                else
+                                        $send_email = false;
+
+                                $this->modifyOrder($orderid, 'pending', $history, $send_email);
 
                                 if($nbcb != 1 && $nbcb != 2)
                                 {
@@ -121,7 +131,12 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                 {
                         $history->data = JText::_('The Payment is pending on channel') . ' : ' . $channel;
                         $this->writeToLog('This payment is still pending.\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n' . print_r($_POST, true) . '===============\n\n\n');
-                        $this->modifyOrder($orderid, 'pending', $history, true);
+                        if($dbOrder->order_status != 'pending')
+                                $send_email = true;
+                        else
+                               $send_email = false;
+
+                        $this->modifyOrder($orderid, 'pending', $history, $send_email);
 
                         if($nbcb != 1 && $nbcb != 2)
                         {
@@ -132,7 +147,12 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                 {
                         $history->data = JText::_('Skey not match!');
                         $this->writeToLog('Skey not match!\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n');
-                        $this->modifyOrder($orderid, 'pending', $history, true);
+                        if($dbOrder->order_status != 'pending')
+                                $send_email = true;
+                        else
+                               $send_email = false;
+
+                        $this->modifyOrder($orderid, 'pending', $history, $send_email);
                 }
 
                 if($nbcb == 1) 
