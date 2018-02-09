@@ -21,11 +21,11 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                 parent::onAfterOrderConfirm($order, $methods, $method_id);
                 
                 $return_url = HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=notify&notif_payment=molpay&tmpl=component&lang=en';
-                //$cancel_url = HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=order&task=cancel_order';
+                $cancel_url = HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=order&task=cancel_order';
                 //$notify_url = HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=notify&notif_payment=molpay&tmpl=component&lang=en';
 
                 $this->payment_params->return_url = $return_url;
-                //$this->payment_params->cancel_url = $cancel_url;
+                $this->payment_params->cancel_url = $cancel_url;
                 //$this->payment_params->notify_url = $notify_url;
 
                 $vars = array(
@@ -39,7 +39,7 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                         'country' => $order->cart->billing_address->address_country->zone_code_2,
                         'vcode' => md5($order->order_full_price . $this->payment_params->merchantID . $order->order_id . $this->payment_params->verifyKey),
                         'returnurl' => $return_url,
-                        //'cancelurl' => $cancel_url,
+                        'cancelurl' => $cancel_url,
                         //'callbackurl' => $notify_url
                 );
 
@@ -96,11 +96,20 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                 {
                         $history->data = JText::_('The Payment is successful on channel') . ' : ' . $channel;
                         $this->writeToLog('This payment is successful.\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n' . print_r($_POST, true) . '===============\n\n\n');
-                        $this->modifyOrder($orderid, 'confirmed', $history, true);
+                        //$this->modifyOrder($orderid, 'confirmed', $history, true);
 
                         if($nbcb != 1 && $nbcb != 2)
                         {
-                                $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+                                if($dbOrder->order_status != 'confirmed')
+                                {
+                                        $this->modifyOrder($orderid, 'confirmed', $history, true);
+                                        $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+                                }
+                                else
+                                {
+										$this->modifyOrder($orderid, 'confirmed', $history, false);
+                                        $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+                                }
                         }
                 }
                 else if($status == '11')
@@ -109,11 +118,20 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                         {
                                 $history->data = JText::_('The Payment has failed on channel') . ' : ' . $channel;
                                 $this->writeToLog('This payment is still pending.\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n' . print_r($_POST, true) . '===============\n\n\n');
-                                $this->modifyOrder($orderid, 'pending', $history, true);
+                                //$this->modifyOrder($orderid, 'pending', $history, true);
 
                                 if($nbcb != 1 && $nbcb != 2)
                                 {
-                                        $this->app->redirect(HIKASHOP_LIVE . 'index.php/component/hikashop/checkout/');
+                                        if($dbOrder->order_status != 'pending')
+                                        {
+                                                $this->modifyOrder($orderid, 'pending', $history, true);
+                                                $this->app->redirect(HIKASHOP_LIVE . 'index.php/component/hikashop/checkout/');
+                                        }     
+                                        else
+                                        {
+                                                $this->modifyOrder($orderid, 'pending', $history, false);											
+                                                $this->app->redirect(HIKASHOP_LIVE . 'index.php/component/hikashop/checkout/');
+                                        }
                                 }
                         }
                 }
@@ -121,18 +139,35 @@ class plgHikashoppaymentMOLPay extends hikashopPaymentPlugin
                 {
                         $history->data = JText::_('The Payment is pending on channel') . ' : ' . $channel;
                         $this->writeToLog('This payment is still pending.\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n' . print_r($_POST, true) . '===============\n\n\n');
-                        $this->modifyOrder($orderid, 'pending', $history, true);
+                        //$this->modifyOrder($orderid, 'pending', $history, true);
 
                         if($nbcb != 1 && $nbcb != 2)
                         {
-                                $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+                                if($dbOrder->order_status != 'pending')
+                                {
+                                        $this->modifyOrder($orderid, 'pending', $history, true);
+                                        $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+                                }
+                                else
+                                {
+                                        $this->modifyOrder($orderid, 'pending', $history, false);									
+                                        $this->app->redirect(HIKASHOP_LIVE . 'index.php?option=com_hikashop&ctrl=checkout&task=after_end');
+                                }
                         }
                 }
                 else
                 {
                         $history->data = JText::_('Skey not match!');
                         $this->writeToLog('Skey not match!\n===============\n' . date('Y-m-d H:i:s') . '\n===============\n');
-                        $this->modifyOrder($orderid, 'pending', $history, true);
+                        //$this->modifyOrder($orderid, 'pending', $history, true);
+                        if($dbOrder->order_status != 'pending')
+                        {
+                                $this->modifyOrder($orderid, 'pending', $history, true);                                
+                        }
+						else
+						{
+								$this->modifyOrder($orderid, 'pending', $history, false);
+						}
                 }
 
                 if($nbcb == 1) 
