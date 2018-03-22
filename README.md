@@ -53,7 +53,9 @@ Installations
 
 11. Save the configuration and test with our sandbox account.
 
-12. Login into MOLPay Merchant Portal and set Callback URL, Notification URL and Return URL
+12. Login into MOLPay Merchant Portal and Click Transaction > Transaction Settings > Endpoint setting.
+
+13. Fill in Callback URL with your shopping cart URL.
 
   ``CallbackURL: https://shoppingcarturl/index.php?option=com_hikashop&ctrl=checkout&task=notify&notif_payment=molpay&tmpl=component&lang=en`` 
   
